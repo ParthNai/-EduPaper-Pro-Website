@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPaper Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .bg-library {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
+        .bg-library-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.5;
+        }
+        .bg-library-1 {
+            background-image: url('https://picsum.photos/2000/1000');
+        }
+        .bg-library-2 {
+            background-image: url('https://picsum.photos/2001/1001');
+        }
+        .parallax-wrapper {
+            perspective: 1000px;
+        }
+        .content-wrapper {
+            transform: translateZ(0);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .glass-form {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background -->
+    <div class="bg-library">
+        <div class="bg-library-image bg-library-1"></div>
+        <div class="bg-library-image bg-library-2"></div>
+    </div>
+
+    <!-- Main content wrapper -->
+    <div class="parallax-wrapper">
+        <div class="content-wrapper">
+            <!-- Navigation -->
+            <nav class="glass-card mb-8 p-4 rounded-lg">
+                <div class="container mx-auto flex justify-between items-center">
+                    <h1 class="text-2xl font-bold text-blue-600">EduPaper Pro</h1>
+                    <div class="space-x-4">
+                        <button id="loginBtn" class="btn btn-login">
+                            <span class="flex items-center">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                                </svg>
+                                Login
+                            </span>
+                        </button>
+                        <button id="registerBtn" class="btn btn-register">
+                            <span class="flex items-center">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                                </svg>
+                                Register
+                            </span>
+                        </button>
+                        <button id="adminLoginBtn" class="btn btn-admin">
+                            <span class="flex items-center">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                Admin
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Login Form -->
+            <div id="loginForm" class="form-container glass-form">
+                <h2 class="text-2xl font-bold mb-6">Login</h2>
+                <form id="loginFormElement">
+                    <div class="mb-4">
+                        <label for="loginMobile" class="block text-sm font-medium mb-2">Mobile Number</label>
+                        <input type="tel" id="loginMobile" class="w-full p-2 rounded-lg form-input" placeholder="Enter your mobile number" required pattern="[0-9]{10}">
+                    </div>
+                    <div class="mb-6">
+                        <label for="loginPassword" class="block text-sm font-medium mb-2">Password</label>
+                        <div class="relative">
+                            <input type="password" id="loginPassword" class="w-full p-2 rounded-lg form-input" placeholder="Enter your password" required minlength="8">
+                            <button type="button" class="absolute right-2 top-2 text-gray-500 hover:text-gray-700 toggle-password">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label for="loginRole" class="block text-sm font-medium mb-2">Login as</label>
+                        <select id="loginRole" class="w-full p-2 rounded-lg form-input" required>
+                            <option value="">Select role</option>
+                            <option value="student">Student</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full py-2 px-4 rounded-lg btn btn-login">
+                        <span class="flex items-center justify-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                            </svg>
+                            Login
+                        </span>
+                    </button>
+                    <p class="mt-4 text-center text-sm">
+                        Don't have an account? 
+                        <button type="button" class="text-blue-600 hover:text-blue-800" onclick="showSection(registrationForm)">Register</button>
+                    </p>
+                </form>
+            </div>
+
+            <!-- Registration Form -->
+            <div id="registrationForm" class="hidden form-container glass-form">
+                <h2 class="text-2xl font-bold mb-6">Create Account</h2>
+                <form id="registrationFormElement">
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="regFirstName" class="block text-sm font-medium mb-2">First Name</label>
+                            <input type="text" id="regFirstName" class="w-full p-2 rounded-lg form-input" placeholder="Enter first name" required>
+                        </div>
+                        <div>
+                            <label for="regLastName" class="block text-sm font-medium mb-2">Last Name</label>
+                            <input type="text" id="regLastName" class="w-full p-2 rounded-lg form-input" placeholder="Enter last name" required>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="regMobile" class="block text-sm font-medium mb-2">Mobile Number</label>
+                        <input type="tel" id="regMobile" class="w-full p-2 rounded-lg form-input" placeholder="Enter mobile number" required pattern="[0-9]{10}">
+                    </div>
+                    <div class="mb-4">
+                        <label for="regEmail" class="block text-sm font-medium mb-2">Email Address</label>
+                        <input type="email" id="regEmail" class="w-full p-2 rounded-lg form-input" placeholder="Enter email address" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="regPassword" class="block text-sm font-medium mb-2">Password</label>
+                        <div class="relative">
+                            <input type="password" id="regPassword" class="w-full p-2 rounded-lg form-input" placeholder="Create password" required minlength="8">
+                            <button type="button" class="absolute right-2 top-2 text-gray-500 hover:text-gray-700 toggle-password">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="mt-1 text-xs space-y-1">
+                            <p class="text-gray-600">Password must contain:</p>
+                            <p class="text-gray-600" id="lengthCheck">✗ At least 8 characters</p>
+                            <p class="text-gray-600" id="upperCheck">✗ One uppercase letter</p>
+                            <p class="text-gray-600" id="lowerCheck">✗ One lowercase letter</p>
+                            <p class="text-gray-600" id="numberCheck">✗ One number</p>
+                            <p class="text-gray-600" id="specialCheck">✗ One special character</p>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label for="regConfirmPassword" class="block text-sm font-medium mb-2">Confirm Password</label>
+                        <div class="relative">
+                            <input type="password" id="regConfirmPassword" class="w-full p-2 rounded-lg form-input" placeholder="Confirm password" required minlength="8">
+                            <button type="button" class="absolute right-2 top-2 text-gray-500 hover:text-gray-700 toggle-password">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label for="regRole" class="block text-sm font-medium mb-2">Register as</label>
+                        <select id="regRole" class="w-full p-2 rounded-lg form-input" required>
+                            <option value="">Select role</option>
+                            <option value="student">Student</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label class="flex items-center">
+                            <input type="checkbox" id="regTerms" class="form-checkbox" required>
+                            <span class="ml-2 text-sm">I accept the Terms and Conditions</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="w-full py-2 px-4 rounded-lg btn btn-register">
+                        <span class="flex items-center justify-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                            </svg>
+                            Create Account
+                        </span>
+                    </button>
+                    <p class="mt-4 text-center text-sm">
+                        Already have an account? 
+                        <button type="button" class="text-blue-600 hover:text-blue-800" onclick="showSection(loginForm)">Login</button>
+                    </p>
+                </form>
+            </div>
+
+            <!-- Admin Login Form -->
+            <div id="adminLoginForm" class="hidden form-container glass-form">
+                <div class="flex justify-center mb-6">
+                    <div class="admin-icon-wrapper">
+                        <svg class="w-16 h-16 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <h2 class="text-2xl font-bold mb-6 text-purple-600">Admin Login</h2>
+                <form id="adminLoginFormElement">
+                    <div class="mb-4">
+                        <label for="adminUsername" class="block text-sm font-medium mb-2">Username</label>
+                        <input type="text" id="adminUsername" class="admin-input w-full p-2 rounded-lg form-input" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="adminPassword" class="block text-sm font-medium mb-2">Password</label>
+                        <input type="password" id="adminPassword" class="admin-input w-full p-2 rounded-lg form-input" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="adminSecurityKey" class="block text-sm font-medium mb-2">Security Key</label>
+                        <input type="password" id="adminSecurityKey" class="admin-input w-full p-2 rounded-lg form-input" required>
+                        <p class="text-sm text-gray-500 mt-1">Additional security key required for admin access</p>
+                    </div>
+                    <button type="submit" class="admin-submit-btn w-full py-2 px-4 rounded-lg btn btn-admin">
+                        <span class="flex items-center justify-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/>
+                            </svg>
+                            Secure Login
+                        </span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Main Dashboard -->
+            <div id="mainContent" class="hidden">
+                <!-- Header -->
+                <header class="bg-white shadow-sm fixed top-0 left-0 right-0 z-50">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="flex justify-between items-center py-4">
+                            <!-- Logo -->
+                            <div class="flex items-center">
+                                <img src="images/logo.png" alt="EduPaper Pro Logo" class="h-8 w-auto">
+                            </div>
+
+                            <!-- Navigation -->
+                            <nav class="hidden md:flex space-x-8" id="mainNav">
+                                <!-- Dynamic nav items will be inserted here based on role -->
+                            </nav>
+
+                            <!-- User Profile -->
+                            <div class="flex items-center">
+                                <div class="relative" id="userProfileDropdown">
+                                    <button class="flex items-center space-x-3 focus:outline-none">
+                                        <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+                                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium" id="userNameDisplay">User Name</span>
+                                        <svg class="w-5 h-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                    <!-- Dropdown Menu -->
+                                    <div class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1" id="userDropdownMenu">
+                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile Settings</a>
+                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Notifications</a>
+                                        <hr class="my-1">
+                                        <button class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100" id="logoutButton">Logout</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Main Content Area with Sidebar -->
+                <div class="flex min-h-screen pt-16">
+                    <!-- Sidebar -->
+                    <aside class="w-64 bg-white shadow-md fixed h-full left-0 overflow-y-auto" id="sidebar">
+                        <!-- Education Board Selection -->
+                        <div class="p-4 border-b">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Education Board</label>
+                            <select class="w-full p-2 border rounded-md" id="boardSelect">
+                                <option value="">Select Board</option>
+                                <option value="CBSE">CBSE</option>
+                                <option value="ICSE">ICSE</option>
+                                <option value="StateBoard">State Board</option>
+                            </select>
+                        </div>
+
+                        <!-- Medium Selection -->
+                        <div class="p-4 border-b">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Medium</label>
+                            <select class="w-full p-2 border rounded-md" id="mediumSelect">
+                                <option value="">Select Medium</option>
+                                <option value="English">English</option>
+                                <option value="Hindi">Hindi</option>
+                                <option value="Gujarati">Gujarati</option>
+                            </select>
+                        </div>
+
+                        <!-- Standard Selection -->
+                        <div class="p-4 border-b">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Standard</label>
+                            <select class="w-full p-2 border rounded-md" id="standardSelect">
+                                <option value="">Select Standard</option>
+                                <!-- Will be populated based on board selection -->
+                            </select>
+                        </div>
+
+                        <!-- Subject Selection -->
+                        <div class="p-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Subjects</label>
+                            <div class="space-y-2" id="subjectsList">
+                                <!-- Will be populated based on standard selection -->
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Main Content -->
+                    <main class="flex-1 ml-64 p-8 bg-gray-50">
+                        <!-- Content Header -->
+                        <div class="mb-8">
+                            <h1 class="text-2xl font-bold text-gray-900" id="contentTitle">Welcome to EduPaper Pro</h1>
+                            <p class="mt-1 text-sm text-gray-600" id="contentSubtitle">Select a board and subject to get started</p>
+                        </div>
+
+                        <!-- Dynamic Content Area -->
+                        <div id="dynamicContent" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- Content will be dynamically inserted here based on role and selections -->
+                        </div>
+                    </main>
+                </div>
+
+                <!-- Footer -->
+                <footer class="bg-white shadow-md mt-8">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        <div class="flex flex-col md:flex-row justify-between items-center">
+                            <div class="text-center md:text-left mb-4 md:mb-0">
+                                <p class="text-sm text-gray-500">&copy; 2025 EduPaper Pro. All rights reserved.</p>
+                            </div>
+                            <div class="flex space-x-6">
+                                <a href="#" class="text-sm text-gray-500 hover:text-gray-900">About Us</a>
+                                <a href="#" class="text-sm text-gray-500 hover:text-gray-900">Contact Us</a>
+                                <a href="#" class="text-sm text-gray-500 hover:text-gray-900">Privacy Policy</a>
+                                <a href="#" class="text-sm text-gray-500 hover:text-gray-900">Terms of Service</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- Dashboard -->
+            <div id="dashboard" class="hidden">
+                <div class="glass-card p-6 rounded-lg mb-8">
+                    <h2 class="text-2xl font-bold mb-4">Welcome, <span id="userRole">User</span>!</h2>
+                    <div id="boardSelection" class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="board">Select Board:</label>
+                        <select id="board" class="w-full p-2 border rounded">
+                            <option value="cbse">CBSE</option>
+                            <option value="icse">ICSE</option>
+                            <option value="state">State Board</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div id="subjectList" class="glass-card p-6 rounded-lg hidden"></div>
+                    <div id="chapterList" class="glass-card p-6 rounded-lg hidden"></div>
+                    <div id="questionList" class="glass-card p-6 rounded-lg hidden"></div>
+                </div>
+
+                <!-- Teacher Dashboard -->
+                <div id="teacherDashboard" class="hidden">
+                    <div id="questionManagement" class="glass-card p-6 rounded-lg mb-6">
+                        <h3 class="text-xl font-bold mb-4">Question Management</h3>
+                        <!-- Question management content -->
+                    </div>
+                    <div id="reportsManagement" class="glass-card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4">Reports Management</h3>
+                        <!-- Reports management content -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Dashboard -->
+            <div id="adminDashboard" class="hidden form-container glass-form">
+                <div class="glass-card p-6 rounded-lg mb-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-purple-600">Admin Dashboard</h2>
+                        <div class="flex items-center space-x-4">
+                            <span class="text-sm text-gray-600">Last Login: <span id="lastLoginTime">2025-04-30 11:57</span></span>
+                            <button id="adminLogoutBtn" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-all">Logout</button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="glass-card p-4 rounded-lg">
+                            <h3 class="font-bold mb-2 text-purple-600">Active Users</h3>
+                            <div class="text-3xl font-bold mb-2">2,547</div>
+                            <div class="text-sm text-gray-600">↑ 12% from last week</div>
+                        </div>
+                        <div class="glass-card p-4 rounded-lg">
+                            <h3 class="font-bold mb-2 text-purple-600">Total Questions</h3>
+                            <div class="text-3xl font-bold mb-2">15,892</div>
+                            <div class="text-sm text-gray-600">↑ 8% from last month</div>
+                        </div>
+                        <div class="glass-card p-4 rounded-lg">
+                            <h3 class="font-bold mb-2 text-purple-600">System Status</h3>
+                            <div class="text-3xl font-bold mb-2 text-green-600">98.5%</div>
+                            <div class="text-sm text-gray-600">Uptime this month</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass-card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4 text-purple-600">User Management</h3>
+                        <div class="space-y-4">
+                            <button class="admin-action-btn w-full">
+                                <span class="flex items-center">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                    </svg>
+                                    Manage Users
+                                </span>
+                            </button>
+                            <button class="admin-action-btn w-full">
+                                <span class="flex items-center">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                    </svg>
+                                    View Reports
+                                </span>
+                            </button>
+                            <button class="admin-action-btn w-full">
+                                <span class="flex items-center">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c-.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    System Settings
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4 text-purple-600">Quick Actions</h3>
+                        <div class="space-y-4">
+                            <button class="admin-action-btn w-full">
+                                <span class="flex items-center">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                                    </svg>
+                                    System Alerts
+                                </span>
+                            </button>
+                            <button class="admin-action-btn w-full">
+                                <span class="flex items-center">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                    Backup Database
+                                </span>
+                            </button>
+                            <button class="admin-action-btn w-full">
+                                <span class="flex items-center">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    Run Diagnostics
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="js/questions.js"></script>
+    <script src="js/teacher.js"></script>
+    <script src="js/reports.js"></script>
+    <script src="js/pdf-export.js"></script>
+    <script src="js/register.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
