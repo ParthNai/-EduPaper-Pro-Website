@@ -1,0 +1,29 @@
+name: edupaper_pro
+description: Educational website for Gujarat Board (GSEB) resources
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  provider: ^6.0.5
+  http: ^1.1.0
+  shared_preferences: ^2.2.0
+  cached_network_image: ^3.2.3
+  url_launcher: ^6.1.12
+  file_picker: ^5.3.3
+  youtube_player_flutter: ^8.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.2
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/icons/

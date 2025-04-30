@@ -1,0 +1,27 @@
+{
+  "name": "edupaper-pro",
+  "version": "1.0.0",
+  "description": "Educational website for Gujarat Board (GSEB) resources",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^25.0.0",
+    "electron-builder": "^24.4.0"
+  },
+  "build": {
+    "appId": "com.edupaper.pro",
+    "productName": "EduPaper Pro",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": ["nsis"],
+      "icon": "assets/icons/icon.ico"
+    }
+  }
+}

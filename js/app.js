@@ -821,3 +821,120 @@ function addAdminContent(container) {
         </div>
     `;
 }
+
+// Mobile menu functionality
+const menuBtn = document.getElementById('menuBtn');
+const sidebar = document.getElementById('sidebar');
+const mainContent = document.querySelector('.main-content');
+
+if (menuBtn && sidebar) {
+    menuBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+    });
+
+    // Close sidebar when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!sidebar.contains(e.target) && !menuBtn.contains(e.target) && sidebar.classList.contains('active')) {
+            sidebar.classList.remove('active');
+        }
+    });
+}
+
+// Handle PWA display
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    e.preventDefault();
+    // Show the install prompt when user clicks a button
+    document.getElementById('installBtn')?.addEventListener('click', () => {
+        e.prompt();
+        e.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+            }
+        });
+    });
+});
+
+// Add touch event handlers for better mobile experience
+document.querySelectorAll('.resource-card').forEach(card => {
+    card.addEventListener('touchstart', () => {
+        card.style.transform = 'scale(0.98)';
+    });
+    
+    card.addEventListener('touchend', () => {
+        card.style.transform = 'scale(1)';
+    });
+});
+
+// Handle offline functionality
+window.addEventListener('online', () => {
+    document.body.classList.remove('offline');
+});
+
+window.addEventListener('offline', () => {
+    document.body.classList.add('offline');
+});
+
+// Add Electron integration
+const { ipcRenderer } = require('electron');
+
+// Modify file download handling
+function downloadPDF(url) {
+    ipcRenderer.send('download-file', url);
+}
+
+// Modify PDF preview handling
+function previewPDF(path) {
+    ipcRenderer.send('preview-pdf', path);
+}
+
+// Handle window controls
+document.addEventListener('DOMContentLoaded', () => {
+    const minimizeBtn = document.getElementById('minimize-btn');
+    const maximizeBtn = document.getElementById('maximize-btn');
+    const closeBtn = document.getElementById('close-btn');
+
+    if (minimizeBtn) {
+        minimizeBtn.addEventListener('click', () => {
+            ipcRenderer.send('minimize-window');
+        });
+    }
+
+    if (maximizeBtn) {
+        maximizeBtn.addEventListener('click', () => {
+            ipcRenderer.send('toggle-maximize-window');
+        });
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            ipcRenderer.send('close-window');
+        });
+    }
+});
+
+// Handle offline/online state for desktop
+window.addEventListener('online', () => {
+    document.body.classList.remove('offline');
+    // Sync data with server when back online
+    syncData();
+});
+
+window.addEventListener('offline', () => {
+    document.body.classList.add('offline');
+    // Save current state to local storage
+    saveCurrentState();
+});
+
+function syncData() {
+    // Implement data synchronization
+    console.log('Syncing data with server...');
+}
+
+function saveCurrentState() {
+    // Save current app state to local storage
+    const currentState = {
+        // Add relevant state data
+    };
+    localStorage.setItem('appState', JSON.stringify(currentState));
+}
